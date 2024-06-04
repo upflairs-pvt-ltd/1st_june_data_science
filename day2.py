@@ -75,14 +75,15 @@
 st = "upflairs"
 
 
-center ,
-st.ljust, 
-st.rjust
-st.islower
-st.isupper
-st.isdigit
-st.isalnum
-st.isalpha
+# center ,
+# st.ljust, 
+# st.rjust
+# st.islower
+# st.isupper
+# st.isdigit
+# st.isalnum
+# st.isalpha
+# lst.extend()
 
 
 print(st.find("u"))
