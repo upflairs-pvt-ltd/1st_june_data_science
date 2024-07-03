@@ -1,4 +1,5 @@
-from flask import Flask, render_template 
+from flask import Flask, render_template ,url_for,request
+import pandas as pd 
 app = Flask(__name__)
 
 # home url "/" , url or root 
@@ -20,6 +21,30 @@ def service():
 def about():
     return render_template('about.html')
 
+
+@app.route('/userdata' , methods=['GET','POST'])
+def userdata():
+    if request.method == 'POST':
+        user_name = request.form['user_name'] 
+        user_email = request.form['user_email']
+        user_message = request.form['user_message']
+
+        user_data = {'user_name':[user_name],'user_email':[user_email],
+        'user_message':[user_message]}
+
+
+        df = pd.DataFrame(user_data)   # single record 
+        df.to_csv('user_data.csv',index=False)
+        # file handling , pandas 
+
+        return user_data 
+
+
+@app.route('/quize',methods=['GET','POST'])
+def quize():
+    if request.method == 'POST':
+        user_name = request.form['User_Name']
+        return render_template('render_data.html' , user_name=user_name)
 
 
 

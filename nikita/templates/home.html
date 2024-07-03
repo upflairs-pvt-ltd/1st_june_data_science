@@ -57,15 +57,30 @@
             </div>
         </div>
     </div>
+    <img src="/static/couple.jpg" alt="" width="300" height="300">
+
+<br><br><br>
+    <h2>Live Quize </h2>
+    <form action="{{ url_for('quize') }}" method="post">
+
+        <label for="">Name</label>
+        <input type="text" name="User_Name">
+        <button type="submit" class="btn btn-primary">Submit</button>
+
+
+    </form>
+    <br><br><br>
 
 
 <a href="/about"> <button> ABOUT</button> </a>
 <a href="/contact"> <button> CONTACT</button> </a>
 <a href="/service"> <button>SERVICE</button> </a>
+<a href="/static/Resume.pdf"> <button>RESUME</button> </a>
+<a href="/static/couple.jpg"> <button>IMAGE</button> </a>
+
 
 <button> COURSES</button>
 <button> BIO</button>
-
 
 
 
