@@ -1,6 +1,8 @@
 from flask import Flask,render_template,url_for,request
-import joblib 
+import joblib
+
 random_forest = joblib.load('./models/randomforest.lb')  # loaded 
+
 app = Flask(__name__)
 
 @app.route('/')  # url 
