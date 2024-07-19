@@ -1,9 +1,13 @@
 from flask import Flask,render_template,url_for,request
 import joblib
-
+import sqlite3
 random_forest = joblib.load('./models/randomforest.lb')  # loaded 
 
 app = Flask(__name__)
+data_insert_query = """
+insert into project (age,gender,bmi,children,region,smoker,health,prediction)
+values(?,?,?,?,?,?,?,?)
+"""
 
 @app.route('/')  # url 
 def home():
@@ -45,10 +49,17 @@ def predict():
                         region_southwest]]
 
 
-        prediction = random_forest.predict(unseen_data)[0]
+        prediction = str(random_forest.predict(unseen_data)[0])
         print(prediction)
-
-        return str(prediction)
+        conn = sqlite3.connect('insurance.db')
+        cur = conn.cursor()
+        Data = (age,gender,bmi,children,region,smoker,health,prediction)
+        cur.execute(data_insert_query,Data)
+        print("Your data is inserted into database : ",Data)
+        conn.commit()
+        cur.close()
+        conn.close()
+        return render_template('final.html',output=prediction)
 
 if __name__ == "__main__":
     app.run(debug=True)
